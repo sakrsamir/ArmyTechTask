@@ -1,4 +1,4 @@
-﻿@model ArmyTechTask.ViewModels.NeighborhoodForm
+﻿@model ArmyTechTask.ViewModels.NeighborhoodViewModel
 @{
     ViewBag.Title = "CreateNeighborhood";
 }
@@ -7,14 +7,14 @@
 @using (Html.BeginForm("CreateNeighborhood", "Govenorates"))
 {
     <div class="form-group">
-        @Html.LabelFor(n => n.Neighborhood.Name)
-        @Html.TextBoxFor(n => n.Neighborhood.Name, new { @class = "form-control", placeholder = "Neighborhood Name" })
-        @Html.ValidationMessageFor(n => n.Neighborhood.Name)
+        @Html.LabelFor(n => n.Name)
+        @Html.TextBoxFor(n => n.Name, new { @class = "form-control", placeholder = "Neighborhood Name" })
+        @Html.ValidationMessageFor(n => n.Name)
     </div>
     <div class="form-group">
-        @Html.LabelFor(n => n.Neighborhood.Governorate)
-        @Html.DropDownListFor(n => n.Neighborhood.GovernorateId, new SelectList(Model.governorates, "Id", "Name"), "Select Governorate", new { @class = "form-control", placeholder = "Neighborhood Name" })
-        @Html.ValidationMessageFor(n => n.Neighborhood.GovernorateId)
+        @Html.LabelFor(n => n.Governorate)
+        @Html.DropDownListFor(n => n.Governorate, (SelectList)ViewBag.govLst, "Select Governorate", new { @class = "form-control", placeholder = "Neighborhood Name" })
+        @Html.ValidationMessageFor(n => n.Governorate)
     </div>
 
     <button class="btn btn-primary" type="submit"> Add</button>

@@ -28,6 +28,10 @@ textarea {
     list-style: none;
     padding: 10px;
 }
+.listTypes {
+    list-style: none;
+    padding: 10px;
+}
 
 .creation {
 }
@@ -38,6 +42,10 @@ span.field-validation-error {
 }
 
 .govTitle {
+    font-size: 18px;
+    color: red;
+}
+.typeTitle {
     font-size: 18px;
     color: red;
 }

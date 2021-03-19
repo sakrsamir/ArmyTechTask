@@ -142,15 +142,31 @@
     <Compile Include="Migrations\202103191425465_AddGovModels.designer.cs">
       <DependentUpon>202103191425465_AddGovModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103191650192_AddCourseModels.cs" />
+    <Compile Include="Migrations\202103191650192_AddCourseModels.designer.cs">
+      <DependentUpon>202103191650192_AddCourseModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103191757486_updatecoursesModels.cs" />
+    <Compile Include="Migrations\202103191757486_updatecoursesModels.designer.cs">
+      <DependentUpon>202103191757486_updatecoursesModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103191834405_renameTypeIdInCouresModels.cs" />
+    <Compile Include="Migrations\202103191834405_renameTypeIdInCouresModels.designer.cs">
+      <DependentUpon>202103191834405_renameTypeIdInCouresModels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDBContext.cs" />
+    <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\CourseType.cs" />
     <Compile Include="Models\Governorate.cs" />
     <Compile Include="Models\Neighborhood.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\GovernorateHomeViewModel.cs" />
-    <Compile Include="ViewModels\GovernorateViewModel.cs" />
-    <Compile Include="ViewModels\NeighborhoodForm.cs" />
-    <Compile Include="ViewModels\NeighborhoodViewModel.cs" />
+    <Compile Include="ViewModels\Course Mangment\CourseTypeViewModel.cs" />
+    <Compile Include="ViewModels\Course Mangment\CourseViewModel.cs" />
+    <Compile Include="ViewModels\Course Mangment\CourseHomeViewModel.cs" />
+    <Compile Include="ViewModels\Governorate Mangment\GovernorateHomeViewModel.cs" />
+    <Compile Include="ViewModels\Governorate Mangment\GovernorateViewModel.cs" />
+    <Compile Include="ViewModels\Governorate Mangment\NeighborhoodViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -190,10 +206,13 @@
     <Content Include="Views\Govenorates\_ListAll.cshtml" />
     <Content Include="Views\Govenorates\Index.cshtml" />
     <Content Include="Views\Govenorates\CreateNeighborhood.cshtml" />
+    <Content Include="Views\Courses\Index.cshtml" />
+    <Content Include="Views\Courses\_AddNewType.cshtml" />
+    <Content Include="Views\Courses\_ListAll.cshtml" />
+    <Content Include="Views\Courses\CreateCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Courses\" />
     <Folder Include="Views\Traniees\" />
   </ItemGroup>
   <ItemGroup>
@@ -215,6 +234,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103191425465_AddGovModels.resx">
       <DependentUpon>202103191425465_AddGovModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103191650192_AddCourseModels.resx">
+      <DependentUpon>202103191650192_AddCourseModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103191757486_updatecoursesModels.resx">
+      <DependentUpon>202103191757486_updatecoursesModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103191834405_renameTypeIdInCouresModels.resx">
+      <DependentUpon>202103191834405_renameTypeIdInCouresModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

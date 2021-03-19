@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ArmyTechTask.ViewModels.CourseTypeViewModel>
+@{
+    int typeNum = 1;
+}
+<ul class="listTypes">
+    @foreach (var item in Model)
+    {
+        <li>
+            <div class="jumbotron">
+                <p class="typeTitle">@(typeNum + "- " + item.Name)</p>
+                <span class="glyphicon glyphicon-list "></span>
+                @{
+                    int i = 1;
+                }
+                @foreach (var n in item.Courses)
+                {
+                    <span> @( i + "- " + n.Name)</span>
+                    i++;
+                }
+
+                <br />
+
+            </div>
+        </li>
+                        typeNum++;
+                    }
+</ul>

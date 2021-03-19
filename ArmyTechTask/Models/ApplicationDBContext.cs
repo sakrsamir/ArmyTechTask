@@ -11,6 +11,10 @@ namespace ArmyTechTask.Models
         public DbSet<Governorate> Governorates { get; set; }
         public DbSet<Neighborhood> Neighborhoods { get; set; }
 
+        public DbSet<CourseType> CourseTypes { get; set; }
+
+        public DbSet<Course> Courses { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             // Fleunt API
@@ -18,6 +22,11 @@ namespace ArmyTechTask.Models
                 .HasRequired(n => n.Governorate)
                 .WithMany(n => n.Neighborhoods)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Course>()
+               .HasRequired(n => n.CouseType)
+               .WithMany(n => n.Courses)
+               .WillCascadeOnDelete(false);
         }
     }
 }

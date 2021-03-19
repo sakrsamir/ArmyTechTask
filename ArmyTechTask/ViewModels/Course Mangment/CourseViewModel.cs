@@ -2,7 +2,7 @@
 
 namespace ArmyTechTask.ViewModels
 {
-    public class NeighborhoodViewModel
+    public class CourseViewModel
     {
         public int Id { get; set; }
 
@@ -11,9 +11,8 @@ namespace ArmyTechTask.ViewModels
         public string Name { get; set; }
 
         [Required]
-        public int GovernorateId { get; set; }
+        public int Type { get; set; }
 
-        public GovernorateViewModel Governorate { get; set; }
-
+        //public CourseTypeViewModel CouseType { get; set; }
     }
 }

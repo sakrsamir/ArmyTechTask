@@ -1,0 +1,41 @@
+﻿
+@model ArmyTechTask.ViewModels.CourseTypeViewModel
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { @id = "frmAddType" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(t => t.Name)
+        @Html.TextBoxFor(t => t.Name, new { @class = "form-control", placeholder = "Type Name" })
+        @Html.ValidationMessageFor(t => t.Name)
+    </div>
+    <a href="#"  class="btn btn-primary" onclick="AddType()">Add</a>
+}
+
+    
+
+
+    <script>
+
+
+        function AddType() {
+            if ($("#frmAddType").valid()) {
+             $.post("@Url.Action("_AddNewType", "Courses")",
+                 $("#frmAddType").serialize(), function (res) {
+                     $('#divListTypes').html(res);
+                    });
+                $('#Name').val("");
+                alert("Course Has been Added")
+            
+        }
+
+        }
+
+
+
+        function clearAll() {
+            $.get("/Product/_CreateOrUpdate/", function (res) {
+                $(".functions").html(res);
+            });
+
+        }
+    </script>

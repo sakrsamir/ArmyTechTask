@@ -14,7 +14,9 @@ namespace ArmyTechTask.Controllers
             _context = new ApplicationDBContext();
         }
 
-        // GET: Govenorate
+
+
+        #region Govenorate
         public ActionResult Index()
         {
             var viewmodel = new GovernorateHomeViewModel
@@ -33,11 +35,6 @@ namespace ArmyTechTask.Controllers
             return View(viewmodel);
            
         }
-
-
-
-
-        //Create New Gov
         public PartialViewResult _AddNewGov()
         {
             return PartialView(new GovernorateViewModel());
@@ -73,39 +70,34 @@ namespace ArmyTechTask.Controllers
             return RedirectToAction("_ListAll");
         }
 
-        // get
+        #endregion
+
+        #region Neighborhood
         public ActionResult CreateNeighborhood()
         {
-            NeighborhoodForm nf = new NeighborhoodForm
-            {
-                Neighborhood = new NeighborhoodViewModel(),
-                governorates = _context.Governorates.Select(g =>
-                new GovernorateViewModel
-                {
-                    Id = g.Id,
-                    Name = g.Name
-                }).ToList()
-            };
-            return View(nf);
+            var lst = new SelectList(_context.Governorates, "Id", "Name");
+            ViewBag.govLst = lst;
+
+
+            var Neighborhood = new NeighborhoodViewModel();
+
+            return View(Neighborhood);
         }
-
-
-
-
         [HttpPost]
-        public ActionResult CreateNeighborhood(NeighborhoodForm viewModel)
+        public ActionResult CreateNeighborhood(NeighborhoodViewModel viewModel)
         {
             if (!ModelState.IsValid)
                 return RedirectToAction("CreateNeighborhood");
 
             var neighborhood = new Neighborhood()
             {
-                Name=viewModel.Neighborhood.Name,
-                GovernorateId=viewModel.Neighborhood.GovernorateId
+                Name=viewModel.Name,
+                GovernorateId=viewModel.Governorate
             };
             _context.Neighborhoods.Add(neighborhood);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+        #endregion
     }
 }
