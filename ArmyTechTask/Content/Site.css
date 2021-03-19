@@ -22,3 +22,31 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/* site*/
+.listGovs {
+    list-style: none;
+    padding: 10px;
+}
+
+.creation {
+}
+
+span.field-validation-error {
+    color: red;
+    font-weight: bold;
+}
+
+.govTitle {
+    font-size: 18px;
+    color: red;
+}
+/* override bootstrap*/
+.navbar-inverse .navbar-brand {
+    color: floralwhite;
+    font-size: 20px;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    font-size: 17px;
+}

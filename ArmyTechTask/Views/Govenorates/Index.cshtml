@@ -1,0 +1,32 @@
+﻿@model ArmyTechTask.ViewModels.GovernorateHomeViewModel
+@{
+    ViewBag.Title = "Governorates";
+}
+
+
+<div class="row ">
+    <div class="col-sm-8">
+        <h3>Govenorates</h3>
+        <p class="text-right"><a href="@Url.Action("CreateNeighborhood","Govenorates")" class="btn btn-link"> <span class="glyphicon glyphicon-edit"></span> New Neighborhood </a></p>
+        <hr />
+        <div id="divListGovs">
+            @Html.Partial("_ListAll", Model.Governorates)
+        </div>
+
+    </div>
+    <div class="col-sm-4 creation jumbotron">
+        <h3> Add New Govenorate</h3>
+        <hr />
+        <div id="NewGov">
+            @Html.Partial("_AddNewGov", Model.NewModel)
+        </div>
+
+    </div>
+</div>
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

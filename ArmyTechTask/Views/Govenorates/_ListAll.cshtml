@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ArmyTechTask.ViewModels.GovernorateViewModel>
+@{
+    int govNum = 1;
+}
+<ul class="listGovs">
+    @foreach (var item in Model)
+    {
+        <li>
+            <div class="jumbotron">
+                <p class="govTitle">@(govNum + "- " + item.Name)</p>
+                <span class="glyphicon glyphicon-list "></span>
+                @{
+                    int i = 1;
+                }
+                @foreach (var n in item.Neighborhoods)
+                {
+                    <span> @( i + "- " + n.Name)</span>
+                    i++;
+                }
+
+                <br />
+
+            </div>
+        </li>
+        govNum++;
+    }
+</ul>

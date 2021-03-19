@@ -1,0 +1,40 @@
+﻿
+@model ArmyTechTask.ViewModels.GovernorateViewModel
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { @id = "frmAddGov" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(g => g.Name)
+        @Html.TextBoxFor(g => g.Name, new { @class = "form-control", placeholder = "Gov Name" })
+        @Html.ValidationMessageFor(g => g.Name)
+    </div>
+    <a href="#"  class="btn btn-primary" onclick="AddGov()">Add</a>
+}
+
+    
+
+
+    <script>
+
+
+        function AddGov() {
+            if ($("#frmAddGov").valid()) {
+             $.post("@Url.Action("_AddNewGov", "Govenorates")",
+                 $("#frmAddGov").serialize(), function (res) {
+                     $('#divListGovs').html(res);
+                    });
+                $('#Name').val("");
+            
+        }
+
+        }
+
+
+
+        function clearAll() {
+            $.get("/Product/_CreateOrUpdate/", function (res) {
+                $(".functions").html(res);
+            });
+
+        }
+    </script>
