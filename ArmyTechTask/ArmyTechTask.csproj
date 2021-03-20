@@ -154,19 +154,27 @@
     <Compile Include="Migrations\202103191834405_renameTypeIdInCouresModels.designer.cs">
       <DependentUpon>202103191834405_renameTypeIdInCouresModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103191921347_TraineeCourseModels.cs" />
+    <Compile Include="Migrations\202103191921347_TraineeCourseModels.designer.cs">
+      <DependentUpon>202103191921347_TraineeCourseModels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDBContext.cs" />
     <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\CourseTrainee.cs" />
     <Compile Include="Models\CourseType.cs" />
     <Compile Include="Models\Governorate.cs" />
     <Compile Include="Models\Neighborhood.cs" />
+    <Compile Include="Models\Trainee.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Course Mangment\CourseTypeViewModel.cs" />
     <Compile Include="ViewModels\Course Mangment\CourseViewModel.cs" />
     <Compile Include="ViewModels\Course Mangment\CourseHomeViewModel.cs" />
+    <Compile Include="ViewModels\CourseTraineeViewModel.cs" />
     <Compile Include="ViewModels\Governorate Mangment\GovernorateHomeViewModel.cs" />
     <Compile Include="ViewModels\Governorate Mangment\GovernorateViewModel.cs" />
     <Compile Include="ViewModels\Governorate Mangment\NeighborhoodViewModel.cs" />
+    <Compile Include="ViewModels\TraineeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -210,10 +218,13 @@
     <Content Include="Views\Courses\_AddNewType.cshtml" />
     <Content Include="Views\Courses\_ListAll.cshtml" />
     <Content Include="Views\Courses\CreateCourse.cshtml" />
+    <Content Include="Views\Traniees\Index.cshtml" />
+    <Content Include="Views\Traniees\CreateCourse.cshtml" />
+    <Content Include="Views\Traniees\_AddNewTrainee.cshtml" />
+    <Content Include="Views\Traniees\_ListAll.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Traniees\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -243,6 +254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103191834405_renameTypeIdInCouresModels.resx">
       <DependentUpon>202103191834405_renameTypeIdInCouresModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103191921347_TraineeCourseModels.resx">
+      <DependentUpon>202103191921347_TraineeCourseModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

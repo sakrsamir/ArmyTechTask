@@ -1,0 +1,15 @@
+﻿@model IEnumerable<ArmyTechTask.ViewModels.TraineeViewModel>
+
+<ul class="listTrrainees">
+    @foreach (var item in Model)
+    {
+        <li>
+            <div class="traineeClass">
+                <p class="typeTitle"><span class="glyphicon glyphicon-pushpin "></span> @(item.Name) <a class="btn btn-link profileShow">Profile</a></p>
+                
+
+            </div>
+        </li>
+               
+                    }
+</ul>

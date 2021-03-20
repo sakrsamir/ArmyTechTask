@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ArmyTechTask.ViewModels.TraineeViewModel>
+@{
+    ViewBag.Title = "Trainees";
+}
+
+
+<div class="row ">
+    <div class="col-sm-8">
+        <h3>Trainees</h3>
+        <p><a href="#" onclick="ToggleAddTrainee()" class="btn btn-link"> <span class="glyphicon glyphicon-edit"></span> New Trainee </a></p>
+        <div>
+            @using (Html.BeginForm("","", FormMethod.Post, new { @id = "frmSearchTrainee" , onkeydown = "return event.keyCode!=13" }))
+            {
+            <div class="input-group searchingTrainess">
+                <input id="searchTerm" name="searchTerm" type="text" class="form-control"/>
+                <span class="input-group-addon">
+                   <a id="btnSearch" onclick="refreshTraineeList()"> <i class="glyphicon glyphicon-search"></i> </a> 
+                </span>
+            </div>
+            <br />
+            }
+        </div>
+        <div id="divListTrainees">
+            @Html.Partial("_ListAll", Model)
+        </div>
+
+    </div>
+    <div class="col-sm-4 creation adddTrainee hide ">
+        <h3>  New Trainee</h3>
+        <div id="CreateTrainee">
+
+            @Html.Partial("_AddNewTrainee", new ArmyTechTask.ViewModels.TraineeViewModel())
+        </div>
+
+    </div>
+</div>
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    
+    
+    function refreshTraineeList() {
+        $.get("@Url.Action("_ListAll", "Traniees")", $("#frmSearchTrainee").serialize(), function (res) {
+            $("#divListTrainees").html(res);
+        });
+
+    }
+</script>

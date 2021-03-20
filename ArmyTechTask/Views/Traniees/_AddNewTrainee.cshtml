@@ -1,0 +1,90 @@
+﻿
+@model ArmyTechTask.ViewModels.TraineeViewModel
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { @id = "frmAddTrainee" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(t => t.Name)
+        @Html.TextBoxFor(t => t.Name, new { @class = "form-control", placeholder = "Type Name" })
+        @Html.ValidationMessageFor(t => t.Name)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(t => t.BirthDate)
+        @Html.TextBoxFor(t => t.BirthDate, new { @class = "form-control", @type = "date" })
+        @Html.ValidationMessageFor(t => t.BirthDate)
+
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(t => t.Governorate)
+        @Html.DropDownListFor(t => t.Governorate, (IEnumerable<SelectListItem>)ViewBag.Govs, new { @class = "form-control", onchange = "CascadeGovs1()" })
+        @Html.ValidationMessageFor(t => t.Governorate)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(t => t.Neighborhood)
+        @Html.DropDownListFor(t => t.Neighborhood, (IEnumerable<SelectListItem>)ViewBag.Neighborhoods, new { @class = "form-control" })
+        @Html.ValidationMessageFor(t => t.Neighborhood)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(t => t.Address)
+        @Html.TextBoxFor(t => t.Address, new { @class = "form-control", placeholder = "Type Adress" })
+
+    </div>
+    <a href="#" class="btn btn-primary" onclick="AddTrainee()">Add</a>
+}
+
+
+
+
+<script>
+
+
+        function AddTrainee() {
+            if ($("#frmAddTrainee").valid()) {
+             $.post("@Url.Action("AddNewTrainee", "Traniees")",
+                 $("#frmAddTrainee").serialize(), function (res) {
+                     if (res != 0) {
+                         $("#divListTrainees").html(res);
+                         $("#frmAddTrainee").trigger('reset');
+                         $("#Neighborhood").empty();
+                         alert("Trainee Has been Added")
+                     }
+                    });
+        }
+
+        }
+    function CascadeGovs1() {
+        var govId = $("#Governorate").val();
+        var nieghbor = $("#Neighborhood");
+        if (govId != '') {
+            
+            nieghbor.empty();
+            $.get("@Url.Action("PopulateNigh", "Traniees")", { govId: govId }, function (res) {
+                
+                $.each(res, function (index, niegh) {
+                    nieghbor.append($('<option/>', {
+                        value: niegh.Value,
+                        text: niegh.Text
+                    }));
+                });
+            });
+        }
+        else {
+            nieghbor.empty();
+        }
+       
+
+        }
+    function ToggleAddTrainee() {
+        var div = $(".adddTrainee");
+        if (div.hasClass("hide")) {
+            div.removeClass("hide");
+        }
+        else {
+            div.addClass("hide")
+        }
+
+    }
+</script>

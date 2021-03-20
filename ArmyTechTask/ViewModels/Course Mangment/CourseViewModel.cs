@@ -13,6 +13,8 @@ namespace ArmyTechTask.ViewModels
         [Required]
         public int Type { get; set; }
 
+        public string TypeName { get; set; }
+
         //public CourseTypeViewModel CouseType { get; set; }
     }
 }

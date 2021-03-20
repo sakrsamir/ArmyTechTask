@@ -1,0 +1,30 @@
+﻿@model ArmyTechTask.ViewModels.CourseViewModel
+@{
+    ViewBag.Title = "CreateCourse";
+}
+
+<h2>Create Neighborhood</h2>
+@using (Html.BeginForm("CreateCourse", "Courses"))
+{
+    <div class="form-group">
+        @Html.LabelFor(n => n.Name)
+        @Html.TextBoxFor(n => n.Name, new { @class = "form-control", placeholder = "Course Name" })
+        @Html.ValidationMessageFor(n => n.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(n => n.Type)
+        @Html.DropDownListFor(n => n.Type, (SelectList)ViewBag.TypesLst, "Select Course Type", new { @class = "form-control", placeholder = "Neighborhood Name" })
+        @Html.ValidationMessageFor(n => n.Type)
+    </div>
+
+    <button class="btn btn-primary" type="submit"> Add</button>
+}
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+

@@ -14,6 +14,8 @@ namespace ArmyTechTask.Models
         public DbSet<CourseType> CourseTypes { get; set; }
 
         public DbSet<Course> Courses { get; set; }
+        public DbSet<Trainee> Trainees { get; set; }
+        public DbSet<CourseTrainee> CourseTrainees { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -27,6 +29,9 @@ namespace ArmyTechTask.Models
                .HasRequired(n => n.CouseType)
                .WithMany(n => n.Courses)
                .WillCascadeOnDelete(false);
+
+            
+                          
         }
     }
 }

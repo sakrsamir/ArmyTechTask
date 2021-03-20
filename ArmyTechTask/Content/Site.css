@@ -49,6 +49,20 @@ span.field-validation-error {
     font-size: 18px;
     color: red;
 }
+.searchingTrainess{
+    width:300px;
+}
+.traineeClass {
+    padding: 5px;
+    
+    margin-bottom:3px;
+}
+
+
+.listTrrainees{
+    list-style:none;
+}
+
 /* override bootstrap*/
 .navbar-inverse .navbar-brand {
     color: floralwhite;
