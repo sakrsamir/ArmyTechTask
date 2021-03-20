@@ -1,0 +1,12 @@
+﻿@model ArmyTechTask.ViewModels.TraineeCourseHome
+
+<div class="jumbotron">
+    <p><span class="txtHeader">Full Name : </span> @Model.Name</p>
+    <p><span class="txtHeader">Birth Date : </span>@Model.BirthDate.ToShortDateString()</p>
+    <p><span class="txtHeader">Address : </span>@Model.Address</p>
+    <p> <span class="glyphicon glyphicon-book"></span> Courses</p>
+    @foreach (var item in Model.Courses)
+    {
+        <span><b>@item.TypeName</b> - @item.Name  - @item.SatrtDate.ToShortDateString()</span><br />
+    }
+</div>

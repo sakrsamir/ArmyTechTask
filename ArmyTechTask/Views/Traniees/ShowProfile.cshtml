@@ -1,0 +1,22 @@
+﻿@model ArmyTechTask.ViewModels.ShowProfileViewModel
+@{
+    ViewBag.Title = "Profile";
+}
+
+<div class="row">
+    <div class="col-sm-8" id="ShowBasicInfo">
+        @Html.Partial("_ShowBasicInfo", Model.traineeCourseHome)
+    </div>
+    <div class="col-sm-4">
+
+        @Html.Partial("_AssignCourseToTrainee", Model.assignCourseTotraineeView)
+    </div>
+</div>
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

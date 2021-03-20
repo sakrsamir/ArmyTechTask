@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ArmyTechTask.ViewModels
 {
@@ -14,6 +15,8 @@ namespace ArmyTechTask.ViewModels
         public int Type { get; set; }
 
         public string TypeName { get; set; }
+
+        public DateTime SatrtDate { get; set; }
 
         //public CourseTypeViewModel CouseType { get; set; }
     }

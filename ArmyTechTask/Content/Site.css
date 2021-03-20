@@ -62,7 +62,10 @@ span.field-validation-error {
 .listTrrainees{
     list-style:none;
 }
-
+.txtHeader{
+    color:red;
+    
+}
 /* override bootstrap*/
 .navbar-inverse .navbar-brand {
     color: floralwhite;

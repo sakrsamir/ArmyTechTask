@@ -13,6 +13,7 @@ namespace ArmyTechTask.Controllers
         {
             _context = new ApplicationDBContext();
         }
+        #region Trainee
         // GET: Student
         public ActionResult Index()
         {
@@ -52,49 +53,8 @@ namespace ArmyTechTask.Controllers
                     }).ToList();
             return Json(Nieghs,JsonRequestBehavior.AllowGet);
         }
-        //public PartialViewResult _AddNewTrainee(TraineeViewModel viewModel)
-        //{
-
-
-
-        //    List<SelectListItem> Govs = new List<SelectListItem>();
-        //    List<SelectListItem> Nieghs = new List<SelectListItem>();
-        //    Govs = _context.Governorates.Select(g => new SelectListItem { Text = g.Name, Value = g.Id.ToString() }).ToList();
-
-        //    if (viewModel.Governorate != 0)
-        //    {
-        //        Nieghs = _context.Neighborhoods
-        //            .Where(n => n.GovernorateId == viewModel.Governorate)
-        //            .Select(g =>
-        //            new SelectListItem
-        //            {
-        //                Text = g.Name,
-        //                Value = g.Id.ToString()
-        //            }).ToList();
-
-
-                
-
-        //    }
-        //    else
-        //    {
-        //        var firstGov = Convert.ToInt32(Govs[0].Value);
-        //        Nieghs = _context.Neighborhoods
-        //            .Where(n => n.GovernorateId == firstGov)
-        //            .Select(g =>
-        //            new SelectListItem
-        //            {
-        //                Text = g.Name,
-        //                Value = g.Id.ToString()
-        //            }).ToList();
-        //    }
-
-        //    ViewBag.Govs = Govs;
-        //    ViewBag.Neighborhoods = Nieghs;
-
-        //    return PartialView(viewModel);
-        //}
-
+        
+        
         [HttpPost]
         public ActionResult AddNewTrainee(TraineeViewModel viewModel)
         {
@@ -128,5 +88,93 @@ namespace ArmyTechTask.Controllers
 
             return PartialView("_ListAll", trainees);
         }
+
+
+        #endregion
+
+        #region AssignCourseToTrainee
+
+        public ActionResult ShowProfile(int Id = 0)
+        {
+            if (Id == 0)
+                return RedirectToAction("Index");
+
+            List<SelectListItem> CoursesTypes = new List<SelectListItem>();
+            List<SelectListItem> Courses = new List<SelectListItem>();
+            CoursesTypes = _context.CourseTypes.Select(g => new SelectListItem { Text = g.Name, Value = g.Id.ToString() }).ToList();
+            var def = new SelectListItem()
+            {
+                Value = "",
+                Text = "--- select CourseType ---"
+            };
+            CoursesTypes.Insert(0, def);
+            ViewBag.CoursesTypes = CoursesTypes;
+            Courses.Insert(0, def);
+            ViewBag.Courses = Courses;
+
+            var trainee = _context.Trainees.FirstOrDefault(t => t.Id == Id);
+            if (trainee != null)
+            {
+                var traineeHome = new TraineeCourseHome
+                {
+                    Id = trainee.Id,
+                    Name = trainee.Name,
+                    BirthDate = trainee.BirthDate,
+                    Address = trainee.Address,
+                    Courses = _context.CourseTrainees.Where(s => s.TraineeId == trainee.Id).Select(g => new CourseViewModel { Name = g.Course.Name, TypeName = g.Course.CouseType.Name, SatrtDate = g.CourseDate })
+                };
+                ShowProfileViewModel viewmodel = new ShowProfileViewModel
+                {
+                    assignCourseTotraineeView = new AssignCourseTotraineeViewModel { TraineeId=Id },
+                    traineeCourseHome = traineeHome
+                };
+                return View(viewmodel);
+            }
+            return RedirectToAction("Index");
+        }
+        public JsonResult PopulateCourses(int typeId)
+        {
+            List<SelectListItem> courses = new List<SelectListItem>();
+            courses = _context.Courses
+                    .Where(n => n.CouseTypeId == typeId)
+                    .Select(g =>
+                    new SelectListItem
+                    {
+                        Text = g.Name,
+                        Value = g.Id.ToString()
+                    }).ToList();
+            return Json(courses, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult AssignCourseToTrainee(AssignCourseTotraineeViewModel viewModel)
+        {
+            var coursetrain = new CourseTrainee
+            {
+                CourseId = viewModel.Course,
+                TraineeId = viewModel.TraineeId,
+                CourseDate = viewModel.CourseDate,
+                Notes = viewModel.Notes
+            };
+            _context.CourseTrainees.Add(coursetrain);
+            _context.SaveChanges();
+
+            return RedirectToAction("_ShowBasicInfo",new { Id=viewModel.TraineeId});
+        }
+        public PartialViewResult _ShowBasicInfo(int Id)
+        {
+            var trainee = _context.Trainees.FirstOrDefault(t => t.Id == Id);
+            
+                var traineeHome = new TraineeCourseHome
+                {
+                    Id = trainee.Id,
+                    Name = trainee.Name,
+                    BirthDate = trainee.BirthDate,
+                    Address = trainee.Address,
+                    Courses = _context.CourseTrainees.Where(s => s.TraineeId == trainee.Id).Select(g => new CourseViewModel { Name = g.Course.Name, TypeName = g.Course.CouseType.Name, SatrtDate = g.CourseDate })
+                };
+                return PartialView("_ShowBasicInfo", traineeHome);     
+        }
+        #endregion
     }
 }

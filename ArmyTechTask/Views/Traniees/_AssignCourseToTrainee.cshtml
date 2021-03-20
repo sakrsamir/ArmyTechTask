@@ -1,0 +1,74 @@
+﻿@model ArmyTechTask.ViewModels.AssignCourseTotraineeViewModel
+
+
+<div class="jumbotron">
+    <h3>Assign Course</h3>
+    @using (Html.BeginForm("", "", FormMethod.Post, new { @id = "frmAssignCourse" }))
+    {
+        @Html.HiddenFor(x => x.TraineeId)
+        <div class="form-group">
+            @Html.LabelFor(x => x.CourseDate)
+            @Html.TextBoxFor(x => x.CourseDate, new { @class = "form-control", @type = "date" })
+            @Html.ValidationMessageFor(x => x.CourseDate)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.CourseType)
+            @Html.DropDownListFor(t => t.CourseType, (IEnumerable<SelectListItem>)ViewBag.CoursesTypes, new { @class = "form-control", onchange = "Cascadecourse()" })
+            @Html.ValidationMessageFor(t => t.CourseType)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.Course)
+            @Html.DropDownListFor(x => x.Course, (IEnumerable<SelectListItem>)ViewBag.Courses, new { @class = "form-control"})
+            @Html.ValidationMessageFor(x => x.Course)
+        </div>
+        <a href="#" class="btn btn-primary" onclick="AssignCourse()"> Assign </a>
+    }
+</div>
+
+
+<script>
+
+
+    
+
+    function Cascadecourse() {
+        var typeId = $("#CourseType").val();
+        var course = $("#Course");
+        if (typeId != '') {
+
+            course.empty();
+            $.get("@Url.Action("PopulateCourses", "Traniees")", { typeId: typeId }, function (res) {
+
+                $.each(res, function (index, crse) {
+                    course.append($('<option/>', {
+                        value: crse.Value,
+                        text: crse.Text
+                    }));
+                });
+            });
+        }
+        else {
+            course.empty();
+        }
+
+
+    }
+
+
+
+    function AssignCourse() {
+        if ($("#frmAssignCourse").valid()) {
+             $.post("@Url.Action("AssignCourseToTrainee", "Traniees")",
+                 $("#frmAssignCourse").serialize(), function (res) {
+                     if (res != 0) {
+                         $("#ShowBasicInfo").html(res);
+                         $("#frmAssignCourse").trigger('reset');
+                         $("#Course").empty();
+                         alert("Course Has been Assigned")
+                     }
+                    });
+        }
+
+    }
+    
+</script>
